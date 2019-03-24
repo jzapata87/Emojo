@@ -2,39 +2,33 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Button, Image} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { createStackNavigator } from 'react-navigation';
-
-// const UploadPhotoScreen = () => (
-//   <SafeAreaView >
-//     <Text> hi</Text>
-//
-//   </SafeAreaView>
-// )
+import { connect } from 'react-redux'
+import { savePhotoUri } from '../redux/actions'
 
 class UploadPhotoScreen extends Component{
+  constructor(props){
+    super(props)
 
-  state = {
-    photo: null,
   }
-
   handleChoosePhoto = () => {
     const options = {
       noData: true,
     }
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
-        this.setState({ photo: response })
+        this.props.savePhotoUri(response.uri)
       }
     })
   }
 
   render() {
-    const { photo } = this.state
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {photo && (
+        {this.props.uri && (
           <React.Fragment>
             <Image
-              source={{ uri: photo.uri }}
+              source={{ uri: this.props.uri}}
               style={{ width: 300, height: 300 }}
             />
             {/* <Button title="Upload" onPress={this.handleUpload} /> */}
@@ -45,6 +39,36 @@ class UploadPhotoScreen extends Component{
     );
   }
 }
+
+// const mapStateToProps = ({ uri }) => ({
+//   uri: uri
+// });
+
+const mapStateToProps = state => {
+  return {
+    uri: state.photo.uri
+  }
+}
+
+// const mapStateToProps = state => ({
+//   uri: uri
+// })
+
+const mapDispatchToProps = {
+  savePhotoUri
+};
+
+// const mapDispatchToProps = (dispatch) => ({
+//   savePhotoUri: () => dispatch(savePhotoUri())
+// })
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addPhotoUri: (uri) => {
+//       dispatch(addPhotoUri(uri))
+//     }
+//   }
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +91,7 @@ const styles = StyleSheet.create({
 
 export default createStackNavigator({
     Home: {
-      screen: UploadPhotoScreen,
+      screen: connect(mapStateToProps, mapDispatchToProps)(UploadPhotoScreen),
       navigationOptions: ({navigation}) => ({
         headerTitle: (
           <Button

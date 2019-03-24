@@ -10,15 +10,25 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import  AppNavigator  from './src/routes/AppNavigator'
-// import { Provider } from 'react-redux';
-// import store from './src/redux/store';
+import { applyMiddleware, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './src/redux/reducers'
+import logger from 'redux-logger'
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(logger)
+)
+
 
 const Root = createAppContainer(AppNavigator);
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
   render() {
     return (
-      <Root/>
+      <Provider store={store}>
+        <Root/>
+      </Provider>
     );
   }
 }
