@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { View, Text, Button, Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
+import NavButton from '../components/NavButton'
 
 const PhotoCommentScreen = ({uri}) => (
-  <View >
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
     <Text> PhotoCommentScreen</Text>
     <Image
       source={{ uri: uri}}
@@ -35,10 +36,9 @@ export default createStackNavigator({
           />
         ),
         headerLeft: (
-          <Button
-            onPress={()=>navigation.navigate('Feed')}
+          <NavButton
+            currentRoute='Feed'
             title='Cancel'
-            color='#841584'
 
           />
         ),

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-
+import NavButton from '../components/NavButton'
 
 const SharePhotoScreen = () => (
   <View >
@@ -25,11 +25,9 @@ export default createStackNavigator({
           />
         ),
         headerLeft: (
-          <Button
-            onPress={()=>navigation.navigate('Feed')}
+          <NavButton
+            currentRoute='Feed'
             title='Cancel'
-            color='#841584'
-
           />
         ),
       })

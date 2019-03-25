@@ -4,6 +4,7 @@ import ImagePicker from 'react-native-image-picker';
 import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import { savePhotoUri } from '../redux/actions'
+import NavButton from '../components/NavButton'
 
 class UploadPhotoScreen extends Component{
   constructor(props){
@@ -101,18 +102,15 @@ export default createStackNavigator({
           />
         ),
         headerRight: (
-          <Button
+          <NavButton
+            currentRoute='AddComments'
             title='Next'
-            color='#841584'
-            onPress={()=>navigation.navigate('AddComments')}
           />
         ),
         headerLeft: (
-          <Button
-            onPress={()=>navigation.navigate('Feed')}
+          <NavButton
+            currentRoute='Feed'
             title='Cancel'
-            color='#841584'
-
           />
         ),
       })
