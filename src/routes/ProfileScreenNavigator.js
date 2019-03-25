@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { ProfileScreen } from '../screens'
 
 export default createStackNavigator({
-    Home: {
+    Profile: {
       screen: ProfileScreen,
       navigationOptions: ({navigation}) => ({
         title: 'Emojo',

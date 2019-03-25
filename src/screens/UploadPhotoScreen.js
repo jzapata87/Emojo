@@ -104,7 +104,7 @@ export default createStackNavigator({
           <Button
             title='Next'
             color='#841584'
-            //onPress={()=>navigation.navigate('Feed')}
+            onPress={()=>navigation.navigate('AddComments')}
           />
         ),
         headerLeft: (

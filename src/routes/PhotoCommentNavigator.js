@@ -1,20 +1,20 @@
 import { createStackNavigator } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation';
 import { View, Text, Button } from 'react-native';
 import React, { Component } from 'react';
+import SharePhotoNavigator from './SharePhotoNavigator';
 
 import {
   UploadPhotoScreen,
-  SharePhotoScreen,
   PhotoCommentScreen, } from '../screens'
 
-export default createBottomTabNavigator({
-  ChoosePhoto: {
-    screen: UploadPhotoScreen
+export default createStackNavigator({
+  SelectImage: {
+    screen: SharePhotoNavigator,
   },
-  TakePhoto: {
-    screen: SharePhotoScreen,
+  AddComments: {
+    screen: PhotoCommentScreen,
   }
 }, {
-  mode: 'card',
+  mode: 'modal',
+  headerMode: 'none'
 });

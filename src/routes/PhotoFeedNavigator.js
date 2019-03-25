@@ -7,7 +7,7 @@ import {
 } from '../screens'
 
 export default createStackNavigator({
-  Home: {
+  Feed: {
     screen: PhotoFeedScreen,
     navigationOptions: ({navigation}) => ({
       title: 'Emojo',
