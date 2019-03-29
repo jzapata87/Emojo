@@ -6,6 +6,11 @@ import { connect } from 'react-redux'
 import { savePhotoUri } from '../redux/actions'
 import NavButton from '../components/NavButton'
 
+function emotion(data) {
+  return data.reduce((max, obj) => obj.Confidence > max.Confidence ? obj : max);
+
+}
+
 class UploadPhotoScreen extends Component{
   constructor(props){
     super(props)
@@ -22,6 +27,32 @@ class UploadPhotoScreen extends Component{
     })
   }
 
+  handleUpload = () => {
+
+    const data = new FormData();
+    data.append("photo", {
+        // Platform.OS === "android" ? this.state.photo.uri : this.state.photo.uri.replace("file://", ""),
+        uri: this.props.uri,
+        name: "testphoto",
+        type: "image/jpeg",
+
+    });
+    fetch("http://localhost:8000/test", {
+      method: "POST",
+      body: data,
+    })
+      .then(response => response.json())
+      .then(response => {
+        console.log(emotion(response))
+        //console.log("upload succes", response[0]);
+        alert(response[0].Type);
+      })
+      .catch(error => {
+        console.log("upload error", error);
+        alert("Upload failed!   ", error);
+      });
+  };
+
   render() {
 
     return (
@@ -32,7 +63,7 @@ class UploadPhotoScreen extends Component{
               source={{ uri: this.props.uri}}
               style={{ width: 300, height: 300 }}
             />
-            {/* <Button title="Upload" onPress={this.handleUpload} /> */}
+            <Button title="Upload" onPress={this.handleUpload} />
           </React.Fragment>
         )}
         <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
@@ -41,35 +72,16 @@ class UploadPhotoScreen extends Component{
   }
 }
 
-// const mapStateToProps = ({ uri }) => ({
-//   uri: uri
-// });
-
 const mapStateToProps = state => {
   return {
     uri: state.photo.uri
   }
 }
 
-// const mapStateToProps = state => ({
-//   uri: uri
-// })
-
 const mapDispatchToProps = {
   savePhotoUri
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   savePhotoUri: () => dispatch(savePhotoUri())
-// })
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addPhotoUri: (uri) => {
-//       dispatch(addPhotoUri(uri))
-//     }
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {

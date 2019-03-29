@@ -6,14 +6,16 @@ import React, { Component } from 'react';
 import {
   UploadPhotoScreen,
   SharePhotoScreen,
-  PhotoCommentScreen, } from '../screens'
+  PhotoCommentScreen,
+  CameraScreen
+} from '../screens'
 
 export default createBottomTabNavigator({
   ChoosePhoto: {
     screen: UploadPhotoScreen
   },
   TakePhoto: {
-    screen: SharePhotoScreen,
+    screen: CameraScreen,
   }
 }, {
   mode: 'card',
