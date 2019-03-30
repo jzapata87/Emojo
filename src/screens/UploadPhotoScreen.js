@@ -3,26 +3,26 @@ import {StyleSheet, Text, View, Button, Image} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
-import { savePhotoUri } from '../redux/actions'
+import { savePhotoUri, fetchBoundingBoxAsync } from '../redux/actions'
 import NavButton from '../components/NavButton'
 import BoundingBox from '../components/BoundingBox'
 
-function emotion(data) {
-  return data.reduce((max, obj) => obj.Confidence > max.Confidence ? obj : max);
-
-}
+// function emotion(data) {
+//   return data.reduce((max, obj) => obj.Confidence > max.Confidence ? obj : max);
+//
+// }
 
 class UploadPhotoScreen extends Component{
   constructor(props){
     super(props)
-    this.state = {
-      box: {
-        top:null,
-        left: null,
-        width: null,
-        height: null
-      }
-    }
+    // this.state = {
+    //   box: {
+    //     top:null,
+    //     left: null,
+    //     width: null,
+    //     height: null
+    //   }
+    // }
 
   }
   handleChoosePhoto = () => {
@@ -31,54 +31,34 @@ class UploadPhotoScreen extends Component{
     }
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
-        this.props.navigation.navigate("AddComments")
+        //this.props.navigation.navigate("AddComments")
         this.props.savePhotoUri(response.uri)
 
       }
     })
   }
 
+  transformDimensions = () => {
+    const { boundingBox } = this.props
+    console.log(boundingBox, "========box===========")
+
+    // box: {
+    //   top: response.BoundingBox.Top*300,
+    //   left: (response.BoundingBox.Left*300)-(((response.BoundingBox.Height-response.BoundingBox.Width)/2)*300),
+    //   width: response.BoundingBox.Height*300,
+    //   height: response.BoundingBox.Height*300
+    // }
+  }
+
   handleUpload = () => {
 
-    const data = new FormData();
-    data.append("photo", {
-        // Platform.OS === "android" ? this.state.photo.uri : this.state.photo.uri.replace("file://", ""),
-        uri: this.props.uri,
-        name: "testphoto",
-        type: "image/jpeg",
+    this.props.fetchBoundingBoxAsync(this.props.uri)
 
-    });
-    fetch("http://localhost:8000/test", {
-      method: "POST",
-      body: data,
-    })
-      .then(response => response.json())
-      .then(response => {
-        console.log(emotion(response.Emotions))
-        console.log("bounding box", response.BoundingBox);
-
-        this.setState({
-          ...this.state,
-          box: {
-            top: response.BoundingBox.Top*300,
-            left: (response.BoundingBox.Left*300)-(((response.BoundingBox.Height-response.BoundingBox.Width)/2)*300),
-            width: response.BoundingBox.Height*300,
-            height: response.BoundingBox.Height*300
-          }
-        })
-
-        console.log("bounding box", response.Emotions[0].Type);
-        alert(response.Emotions[0].Type);
-      })
-      .catch(error => {
-        console.log("upload error", error);
-        alert("Upload failed!   ", error);
-      });
   };
 
   render() {
-    console.log(this.state)
 
+    this.transformDimensions()
     return (
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -90,7 +70,7 @@ class UploadPhotoScreen extends Component{
               style={{ width: 300, height: 300 }}
               resizeMode="contain"
             />
-            <BoundingBox top={this.state.box.top} left={this.state.box.left} height={this.state.box.height} width={this.state.box.width}/>
+            {/* <BoundingBox top={this.state.box.top} left={this.state.box.left} height={this.state.box.height} width={this.state.box.width}/> */}
           </View>
             <Button title="Upload" onPress={this.handleUpload} />
           </React.Fragment>
@@ -103,12 +83,14 @@ class UploadPhotoScreen extends Component{
 
 const mapStateToProps = state => {
   return {
-    uri: state.photo.uri
+    uri: state.photo.uri,
+    boundingBox: state.photo.data
   }
 }
 
 const mapDispatchToProps = {
-  savePhotoUri
+  savePhotoUri,
+  fetchBoundingBoxAsync
 };
 
 
