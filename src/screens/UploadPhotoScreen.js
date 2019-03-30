@@ -31,7 +31,9 @@ class UploadPhotoScreen extends Component{
     }
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
+        this.props.navigation.navigate("AddComments")
         this.props.savePhotoUri(response.uri)
+
       }
     })
   }
