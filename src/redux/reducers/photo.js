@@ -12,12 +12,13 @@ const photo = (state = {}, action) => {
     case 'FETCH_REQUESTED_ASYNC':
       return {
         ...state,
-          loading: true
+          loading: "isLoading"
       }
     case 'FETCH_SUCCEEDED':
       return {
         ...state,
-          data: action.data
+          data: action.data,
+          loading: "isLoaded"
       }
     case 'FETCH_FAILED':
       return {

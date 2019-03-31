@@ -18,7 +18,6 @@ import createSagaMiddleware from 'redux-saga'
 import watchFetchData from './src/sagas/index'
 
 const sagaMiddleware = createSagaMiddleware()
-
 const store = createStore(
   rootReducer,
   applyMiddleware(sagaMiddleware, logger)
