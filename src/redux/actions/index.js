@@ -14,3 +14,13 @@ export const fetchBoundingBoxAsync = (uri) => ({
   uri
 
 })
+
+export const emojiMounted = () => ({
+  type: 'EMOJI_MOUNTED',
+
+})
+
+export const saveNewUri = uri => ({
+  type: 'SAVE_NEW_URI',
+  newUri: uri
+})

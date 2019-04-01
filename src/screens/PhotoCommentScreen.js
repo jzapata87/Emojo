@@ -4,11 +4,11 @@ import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import NavButton from '../components/NavButton'
 
-const PhotoCommentScreen = ({uri}) => (
+const PhotoCommentScreen = ({newUri}) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }} >
     <Text> PhotoCommentScreen</Text>
     <Image
-      source={{ uri: uri}}
+      source={{ uri: newUri}}
       style={{ width: 300, height: 300 }}
     />
 
@@ -17,7 +17,7 @@ const PhotoCommentScreen = ({uri}) => (
 
 const mapStateToProps = state => {
   return {
-    uri: state.photo.uri
+    newUri: state.photo.newUri
   }
 }
 

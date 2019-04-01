@@ -25,6 +25,16 @@ const photo = (state = {}, action) => {
         ...state,
           error: action.error
       }
+    case 'CAPTURE':
+      return {
+        ...state,
+          capture: action.capture
+      }
+    case 'SAVE_NEW_URI':
+      return {
+        ...state,
+          newUri: action.newUri
+      }
     default:
       return state
   }

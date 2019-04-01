@@ -12,7 +12,6 @@ class NavButton extends React.Component {
   }
 
   handlePress () {
-
     this.props.saveNavState(this.props.currentRoute)
     this.props.navigation.navigate(this.props.currentRoute)
 

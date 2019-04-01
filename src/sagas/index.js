@@ -13,6 +13,15 @@ function* fetchData(action) {
    }
 }
 
+function* emojiMounted(action) {
+  try {
+    yield put({type: "CAPTURE", capture: true})
+  } catch (error) {
+
+  }
+}
+
 export default function* watchFetchData() {
   yield takeEvery('FETCH_REQUESTED', fetchData)
+  yield takeEvery('EMOJI_MOUNTED', emojiMounted)
 }

@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Button, Image} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
-import { savePhotoUri, fetchBoundingBoxAsync } from '../redux/actions'
+import { savePhotoUri, fetchBoundingBoxAsync, saveNewUri } from '../redux/actions'
 import NavButton from '../components/NavButton'
 import BoundingBox from '../components/BoundingBox'
 import { captureRef } from "react-native-view-shot";
@@ -16,11 +16,8 @@ import { captureRef } from "react-native-view-shot";
 class UploadPhotoScreen extends Component{
   constructor(props){
     super(props)
-    this.state={
-      photo: ''
-    }
-    }
 
+    }
 
   handleChoosePhoto = () => {
     const options = {
@@ -30,23 +27,22 @@ class UploadPhotoScreen extends Component{
       if (response.uri) {
         //this.props.navigation.navigate("AddComments")
         this.props.savePhotoUri(response.uri)
-
+        this.handleUpload()
       }
     })
   }
 
   handleCapture = () => {
+
     captureRef(this.myRef, {
       format: "jpg",
       quality: 0.8
     })
     .then(
-      uri => this.setState({photo: uri}),
+      uri => this.props.saveNewUri(uri),
       error => console.error("Oops, snapshot failed", error)
-    );
+    )
   }
-
-
 
   transformDimensions = () => {
     const { boundingBox } = this.props
@@ -60,6 +56,7 @@ class UploadPhotoScreen extends Component{
 
   handleUpload = () => {
     this.props.fetchBoundingBoxAsync(this.props.uri)
+
   };
 
   render() {
@@ -68,7 +65,7 @@ class UploadPhotoScreen extends Component{
     if (loading === "isLoaded") {
         dim = this.transformDimensions()
     }
-    console.log(dim)
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {this.props.uri && (
@@ -79,18 +76,11 @@ class UploadPhotoScreen extends Component{
                 style={{ width: 300, height: 300 }}
                 resizeMode="contain"
               />
-            {(loading === "isLoaded") && <BoundingBox dim={dim}/> }
+            {(loading === "isLoaded") && <BoundingBox capture={this.handleCapture} dim={dim}/> }
           </View>
-            <Button title="Upload" onPress={this.handleUpload} />
           </React.Fragment>
         )}
         <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
-        <Button title="Capture" onPress={this.handleCapture} />
-        <Image
-          source={{ uri: this.state.photo}}
-          style={{ width: 300, height: 300 }}
-          resizeMode="contain"
-        />
       </View>
     );
   }
@@ -100,13 +90,14 @@ const mapStateToProps = state => {
   return {
     uri: state.photo.uri,
     boundingBox: state.photo.data,
-    loading: state.photo.loading
+    loading: state.photo.loading,
   }
 }
 
 const mapDispatchToProps = {
   savePhotoUri,
-  fetchBoundingBoxAsync
+  fetchBoundingBoxAsync,
+  saveNewUri
 };
 
 
@@ -144,6 +135,7 @@ export default createStackNavigator({
           <NavButton
             currentRoute='AddComments'
             title='Next'
+
           />
         ),
         headerLeft: (
