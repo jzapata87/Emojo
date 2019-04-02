@@ -7,7 +7,9 @@ const photo = (state = {}, action) => {
     case 'SAVE_PHOTO_URI':
       return {
         ...state,
-          uri: action.uri
+          photoUri: action.photo.uri,
+          fileName: action.photo.fileName,
+          type: action.photo.type
       }
     case 'FETCH_REQUESTED_ASYNC':
       return {
@@ -34,6 +36,21 @@ const photo = (state = {}, action) => {
       return {
         ...state,
           newUri: action.newUri
+      }
+    case 'CHANGE_TEXT':
+      return {
+        ...state,
+          comment: action.text
+      }
+    case 'SHARE_SUCCEEDED':
+      return {
+        ...state,
+          shareData: action.data
+      }
+    case 'SHARE_FAILED':
+      return {
+        ...state,
+          shareError: action.error
       }
     default:
       return state

@@ -1,7 +1,7 @@
-export const savePhotoUri = uri => ({
+export const savePhotoUri = photo => ({
 
   type: 'SAVE_PHOTO_URI',
-  uri
+  photo
 })
 
 export const saveNavState = route => ({
@@ -23,4 +23,16 @@ export const emojiMounted = () => ({
 export const saveNewUri = uri => ({
   type: 'SAVE_NEW_URI',
   newUri: uri
+})
+
+export const handleChangeText = text => ({
+  type: 'CHANGE_TEXT',
+  text
+})
+
+export const sharePhoto = (uri, fileName, imageType) => ({
+  type: 'SHARE_STARTED',
+  uri,
+  fileName,
+  imageType
 })

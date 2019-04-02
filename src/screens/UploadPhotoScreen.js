@@ -26,7 +26,7 @@ class UploadPhotoScreen extends Component{
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
         //this.props.navigation.navigate("AddComments")
-        this.props.savePhotoUri(response.uri)
+        this.props.savePhotoUri(response)
         this.handleUpload()
       }
     })
@@ -88,9 +88,10 @@ class UploadPhotoScreen extends Component{
 
 const mapStateToProps = state => {
   return {
-    uri: state.photo.uri,
+    photo: state.photo.photo,
     boundingBox: state.photo.data,
     loading: state.photo.loading,
+    uri: state.photo.photoUri
   }
 }
 
@@ -133,7 +134,8 @@ export default createStackNavigator({
         ),
         headerRight: (
           <NavButton
-            currentRoute='AddComments'
+            nextRoute='AddComments'
+            currentRoute='Feed'
             title='Next'
 
           />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { saveNavState } from '../redux/actions'
+import { saveNavState, sharePhoto } from '../redux/actions'
 import { connect } from 'react-redux'
 
 
@@ -12,8 +12,12 @@ class NavButton extends React.Component {
   }
 
   handlePress () {
-    this.props.saveNavState(this.props.currentRoute)
-    this.props.navigation.navigate(this.props.currentRoute)
+    if (this.props.currentRoute === "AddComments") {
+      this.props.sharePhoto(this.props.uri, this.props.fileName, this.props.type)
+    }
+
+    this.props.saveNavState(this.props.nextRoute)
+    this.props.navigation.navigate(this.props.nextRoute)
 
   }
 
@@ -24,13 +28,17 @@ class NavButton extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    route: state.navigation.route
+    route: state.navigation.route,
+    uri: state.photo.newUri,
+    fileName: state.photo.fileName,
+    type: state.photo.type
   }
 }
 
 
 const mapDispatchToProps = {
-  saveNavState
+  saveNavState,
+  sharePhoto
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(withNavigation(NavButton));
