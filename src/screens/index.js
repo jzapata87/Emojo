@@ -4,6 +4,7 @@ import ProfileScreen from './ProfileScreen';
 import SharePhotoScreen from './SharePhotoScreen';
 import PhotoCommentScreen from './PhotoCommentScreen';
 import CameraScreen from './CameraScreen';
+import LoginScreen from './LoginScreen';
 
 
 export {
@@ -12,7 +13,8 @@ export {
   PhotoFeedScreen,
   SharePhotoScreen,
   PhotoCommentScreen,
-  CameraScreen
+  CameraScreen,
+  LoginScreen
 
 
 }

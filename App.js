@@ -8,8 +8,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
-import  AppNavigator  from './src/routes/AppNavigator'
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
+import  AppNavigator, {AuthStack}  from './src/routes/AppNavigator'
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './src/redux/reducers'
@@ -27,7 +27,15 @@ const store = createStore(
 sagaMiddleware.run(watchFetchData)
 
 
-const Root = createAppContainer(AppNavigator);
+const Root = createAppContainer(createSwitchNavigator(
+  {
+    App: AppNavigator,
+    Auth: AuthStack
+  },
+  {
+    initialRouteName: 'Auth'
+  }
+));
 
 export default class App extends Component {
   render() {

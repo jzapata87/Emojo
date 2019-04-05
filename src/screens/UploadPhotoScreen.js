@@ -142,6 +142,7 @@ export default createStackNavigator({
         ),
         headerLeft: (
           <NavButton
+            nextRoute='Feed'
             currentRoute='Feed'
             title='Cancel'
           />
