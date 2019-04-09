@@ -1,5 +1,5 @@
 import { put, takeEvery, call, select } from 'redux-saga/effects'
-import fetchBoundingBox, { s3Upload } from '../api/index'
+import fetchBoundingBox, { s3Upload, getUserData } from '../api/index'
 
 
 function* fetchData(action) {
@@ -24,6 +24,17 @@ function* uploadToS3(action) {
    }
 }
 
+function* getUserInfo(action) {
+
+   try {
+      const data = yield getUserData(action.token)
+      yield put({type: "GET_USER_INFO_SUCCEEDED", data: data})
+
+   } catch (error) {
+      yield put({type: "GET_USER_INFO_FAILED", error})
+   }
+}
+
 function* emojiMounted(action) {
   try {
     yield put({type: "CAPTURE", capture: true})
@@ -36,4 +47,5 @@ export default function* watchFetchData() {
   yield takeEvery('FETCH_REQUESTED', fetchData)
   yield takeEvery('EMOJI_MOUNTED', emojiMounted)
   yield takeEvery('SHARE_STARTED', uploadToS3)
+  yield takeEvery('GET_USER_INFO', getUserInfo)
 }

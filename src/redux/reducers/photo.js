@@ -57,4 +57,6 @@ const photo = (state = {}, action) => {
   }
 }
 
+
+
 export default photo

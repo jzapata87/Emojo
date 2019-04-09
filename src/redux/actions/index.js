@@ -36,3 +36,8 @@ export const sharePhoto = (uri, fileName, imageType) => ({
   fileName,
   imageType
 })
+
+export const getUserInfo = token => ({
+  type: 'GET_USER_INFO',
+  token
+})

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, Button } from 'react-native';
 import { LoginManager, AccessToken } from "react-native-fbsdk";
+import { connect } from 'react-redux'
+import { getUserInfo } from '../redux/actions'
 
-export default class LoginScreen extends Component {
-  state = {
+class LoginScreen extends Component {
 
-  }
 
   _onLoginPress = () => {
 
@@ -22,6 +22,7 @@ export default class LoginScreen extends Component {
       await AccessToken.getCurrentAccessToken()
         .then(data => {
           console.log(data, "dataaaaaaa");
+          this.props.getUserInfo(data.accessToken)
         }).then(() => this.props.navigation.navigate('App'));
     }
   }
@@ -51,3 +52,10 @@ export default class LoginScreen extends Component {
     )
   }
 }
+
+
+const mapDispatchToProps = {
+  getUserInfo
+};
+
+export default connect(null, mapDispatchToProps)(LoginScreen)

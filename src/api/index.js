@@ -38,3 +38,19 @@ export const s3Upload = (uri, fileName, type) => {
       return error
     });
 };
+
+export const getUserData = (token) => {
+  console.log(token, 'token')
+  return fetch("http://localhost:8000/auth", {
+    method: "POST",
+    body: JSON.stringify({token: token}),
+    headers:{
+    'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      return response.json()})
+    .catch(error => {
+      return error
+    });
+}
