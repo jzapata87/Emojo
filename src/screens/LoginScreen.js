@@ -23,7 +23,8 @@ class LoginScreen extends Component {
         .then(data => {
           console.log(data, "dataaaaaaa");
           this.props.getUserInfo(data.accessToken)
-        }).then(() => this.props.navigation.navigate('App'));
+        }).then(() => this.props.navigation.navigate('App'))
+        .catch(e => console.log(e, "errorrrrrrrrrr"))
     }
   }
 
@@ -57,5 +58,7 @@ class LoginScreen extends Component {
 const mapDispatchToProps = {
   getUserInfo
 };
+
+
 
 export default connect(null, mapDispatchToProps)(LoginScreen)

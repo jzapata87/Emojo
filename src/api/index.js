@@ -35,7 +35,7 @@ export const s3Upload = (uri, fileName, type) => {
     .then(response => {
       return response.json()})
     .catch(error => {
-      return error
+      return error.status(400).send(error)
     });
 };
 
@@ -51,6 +51,21 @@ export const getUserData = (token) => {
     .then(response => {
       return response.json()})
     .catch(error => {
-      return error
+      throw Error("error")
+    });
+}
+
+export const fetchFeed = (id) => {
+  console.log("inside feeeeef", id)
+  return fetch(`http://localhost:8000/user/${id}`, {
+    method: "GET",
+    headers:{
+    'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      return response.json()})
+    .catch(error => {
+      throw Error(error)
     });
 }

@@ -5,6 +5,11 @@ const user = (state = {}, action) => {
         ...state,
           userInfo: action.data
       }
+    case "GET_USER_FEED_SUCCEEDED":
+      return {
+        ...state,
+          data: action.data
+      }
     default:
       return state
   }
