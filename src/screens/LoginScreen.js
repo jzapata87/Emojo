@@ -8,20 +8,14 @@ class LoginScreen extends Component {
 
 
   _onLoginPress = () => {
-
     this._logInWithFacebook();
-
-
   }
 
   _logInWithFacebook = async () => {
     const data  = await LoginManager.logInWithReadPermissions(["public_profile", "email"]);
-    console.log(data)
     if (!data.isCancelled) {
-      //console.log(this.props.login('token', 'provider'), "hiiiii");
       await AccessToken.getCurrentAccessToken()
         .then(data => {
-          console.log(data, "dataaaaaaa");
           this.props.getUserInfo(data.accessToken)
         }).then(() => this.props.navigation.navigate('App'))
         .catch(e => console.log(e, "errorrrrrrrrrr"))
@@ -54,11 +48,8 @@ class LoginScreen extends Component {
   }
 }
 
-
 const mapDispatchToProps = {
   getUserInfo
 };
-
-
 
 export default connect(null, mapDispatchToProps)(LoginScreen)

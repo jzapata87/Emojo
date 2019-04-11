@@ -15,11 +15,6 @@ export const fetchBoundingBoxAsync = (uri) => ({
 
 })
 
-export const emojiMounted = () => ({
-  type: 'EMOJI_MOUNTED',
-
-})
-
 export const saveNewUri = uri => ({
   type: 'SAVE_NEW_URI',
   newUri: uri
@@ -30,11 +25,12 @@ export const handleChangeText = text => ({
   text
 })
 
-export const sharePhoto = (uri, fileName, imageType) => ({
+export const sharePhoto = (uri, fileName, imageType, id) => ({
   type: 'SHARE_STARTED',
   uri,
   fileName,
-  imageType
+  imageType,
+  id
 })
 
 export const getUserInfo = token => ({

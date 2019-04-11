@@ -1,5 +1,5 @@
 
-
+import Images from '../../assets/index.js';
 
 
 const photo = (state = {}, action) => {
@@ -19,7 +19,8 @@ const photo = (state = {}, action) => {
     case 'FETCH_SUCCEEDED':
       return {
         ...state,
-          data: action.data,
+          emotion: emotion(action.data.Emotions),
+          data: action.data.BoundingBox,
           loading: "isLoaded"
       }
     case 'FETCH_FAILED':
@@ -57,6 +58,28 @@ const photo = (state = {}, action) => {
   }
 }
 
+function emotion(data) {
+   const emotion =  data.reduce((max, obj) => obj.Confidence > max.Confidence ? obj : max);
 
+   return emotionToFileName(emotion)
+}
+
+function emotionToFileName(emotion) {
+    console.log(emotion.Type)
+    switch (emotion.Type) {
+      case 'HAPPY':
+        return Images.happy
+      case 'CONFUSED':
+        return Images.confused
+      case 'DISGUSTED':
+        return Images.disgusted
+      case 'ANGRY':
+        return Images.angry
+      case 'SAD':
+        return Images.sad
+      default:
+        return null
+  }
+}
 
 export default photo

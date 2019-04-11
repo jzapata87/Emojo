@@ -18,8 +18,6 @@ const ProfileScreen = ({avatar, name, list}) => (
       />}
       keyExtractor={(item, index) => item.uri}
     />
-
-
   </View>
 )
 

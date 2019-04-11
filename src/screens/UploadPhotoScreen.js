@@ -91,7 +91,7 @@ const mapStateToProps = state => {
     photo: state.photo.photo,
     boundingBox: state.photo.data,
     loading: state.photo.loading,
-    uri: state.photo.photoUri
+    uri: state.photo.photoUri,
   }
 }
 

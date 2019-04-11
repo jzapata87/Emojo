@@ -13,7 +13,7 @@ class NavButton extends React.Component {
 
   handlePress () {
     if (this.props.currentRoute === "AddComments") {
-      this.props.sharePhoto(this.props.uri, this.props.fileName, this.props.type)
+      this.props.sharePhoto(this.props.uri, this.props.fileName, this.props.type, this.props.id)
     }
 
     this.props.saveNavState(this.props.nextRoute)
@@ -31,7 +31,8 @@ const mapStateToProps = state => {
     route: state.navigation.route,
     uri: state.photo.newUri,
     fileName: state.photo.fileName,
-    type: state.photo.type
+    type: state.photo.type,
+    id: state.user.data.id
   }
 }
 

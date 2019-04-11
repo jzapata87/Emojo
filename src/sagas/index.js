@@ -6,7 +6,8 @@ function* fetchData(action) {
 
    try {
       const data = yield fetchBoundingBox(action.uri)
-      yield put({type: "FETCH_SUCCEEDED", data: data.BoundingBox})
+      console.log("fetch bounding box data", data)
+      yield put({type: "FETCH_SUCCEEDED", data: data})
 
    } catch (error) {
       yield put({type: "FETCH_FAILED", error})
@@ -17,7 +18,7 @@ function* fetchData(action) {
 function* uploadToS3(action) {
 
    try {
-      const data = yield s3Upload(action.uri, action.fileName, action.type)
+      const data = yield s3Upload(action.uri, action.fileName, action.type, action.id)
       yield put({type: "SHARE_SUCCEEDED", data: data.Location})
 
    } catch (error) {
@@ -50,17 +51,9 @@ function* fetchUserFeed(action) {
    }
 }
 
-function* emojiMounted(action) {
-  try {
-    yield put({type: "CAPTURE", capture: true})
-  } catch (error) {
-
-  }
-}
 
 export default function* watchFetchData() {
   yield takeEvery('FETCH_REQUESTED', fetchData)
-  yield takeEvery('EMOJI_MOUNTED', emojiMounted)
   yield takeEvery('SHARE_STARTED', uploadToS3)
   yield takeEvery('GET_USER_INFO', getUserInfo)
   yield takeEvery('GET_USER_FEED', fetchUserFeed)

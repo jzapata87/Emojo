@@ -19,7 +19,8 @@ export default fetchBoundingBox = (uri) => {
     });
 };
 
-export const s3Upload = (uri, fileName, type) => {
+export const s3Upload = (uri, fileName, type, id) => {
+  console.log("===============inside s3upload api===============", uri, fileName, type);
   const data = new FormData();
   data.append("photo", {
       //Platform.OS === "android" ? this.state.photo.uri : this.state.photo.uri.replace("file://", ""),
@@ -28,14 +29,14 @@ export const s3Upload = (uri, fileName, type) => {
       type: type,
 
   });
-  return fetch("http://localhost:8000/upload", {
+  return fetch(`http://localhost:8000/upload/${id}`, {
     method: "POST",
     body: data,
   })
     .then(response => {
       return response.json()})
     .catch(error => {
-      return error.status(400).send(error)
+      throw Error(error)
     });
 };
 
