@@ -7,7 +7,7 @@ I use instagrams basic layout because I felt it best represented what I wanted t
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-===
+
 ## Installation
 This is a react-native project, I will ask you to please refer those resources in order to get the project running on your machine.
 I did not use expo.  I used xcode and android studio to run the simulator/emulators.
@@ -17,8 +17,8 @@ I will post a link to a video of me using the app or I will just use screenshots
 
 ## Tech Used
 
-| **Tech** | **Description** |
-| ---------|-----------------|
+| **Tech**        | **Description** |
+| ----------------|-----------------|
 | [React-Native](https://github.com/facebook/react-native) | React's UI framework for iOS and Android |
 | [React Navigation](https://reactnavigation.org/en/) | Routing and navigation for React Native apps |
 | [Redux](http://redux.js.org/) | State management |
