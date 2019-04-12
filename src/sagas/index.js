@@ -18,8 +18,9 @@ function* fetchData(action) {
 function* uploadToS3(action) {
 
    try {
-      const data = yield s3Upload(action.uri, action.fileName, action.type, action.id)
-      yield put({type: "SHARE_SUCCEEDED", data: data.Location})
+     // make sure the correct payload is being pass through....imageType/Type
+      const data = yield s3Upload(action.uri, action.fileName, action.imageType, action.id)
+      yield put({type: "SHARE_SUCCEEDED", data: data})
 
    } catch (error) {
       yield put({type: "SHARE_FAILED", error})

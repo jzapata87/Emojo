@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Button, Image} from 'react-native';
+import {StyleSheet, Text, View, Button, Image, ImageBackground} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux'
 import { savePhotoUri, fetchBoundingBoxAsync, saveNewUri } from '../redux/actions'
 import NavButton from '../components/NavButton'
 import BoundingBox from '../components/BoundingBox'
-import { captureRef } from "react-native-view-shot";
+import ViewShot, { captureRef } from "react-native-view-shot";
 
 // function emotion(data) {
 //   return data.reduce((max, obj) => obj.Confidence > max.Confidence ? obj : max);
@@ -36,7 +36,8 @@ class UploadPhotoScreen extends Component{
 
     captureRef(this.myRef, {
       format: "jpg",
-      quality: 0.8
+      quality: 0.8,
+      result: 'tmpfile'
     })
     .then(
       uri => this.props.saveNewUri(uri),
@@ -69,16 +70,20 @@ class UploadPhotoScreen extends Component{
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {this.props.uri && (
-          <React.Fragment>
-            <View ref={component => this.myRef = component}>
-              <Image
+
+            <ViewShot ref={component => this.myRef = component} style={{ zIndex: 0}}>
+              <ImageBackground
                 source={{ uri: this.props.uri}}
                 style={{ width: 300, height: 300 }}
                 resizeMode="contain"
-              />
-            {(loading === "isLoaded") && <BoundingBox capture={this.handleCapture} dim={dim}/> }
-          </View>
-          </React.Fragment>
+                //ref={component => this.myRef = component}
+
+              >
+                {(loading === "isLoaded") && <BoundingBox capture={this.handleCapture} dim={dim}/> }
+              </ImageBackground>
+
+            </ViewShot>
+
         )}
         <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
       </View>

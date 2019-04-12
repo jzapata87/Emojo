@@ -19,7 +19,7 @@ class BoundingBox extends Component{
     const { dim, emotionToFilename } = this.props;
     return (
       <View style={{ top: dim.top, left: dim.left, zIndex: 1, position: 'absolute', width: dim.width, height: dim.height}}>
-        <Image onLoad={this.capture} style={{flex: 1, width: dim.width, height: dim.height }} source={emotionToFilename} />
+        <Image fadeDuration={0} onLoad={this.capture} style={{flex: 1, width: dim.width, height: dim.height, zIndex: 2 }} source={emotionToFilename} />
       </View>
     )
   }

@@ -1,3 +1,6 @@
+import axios from 'axios';
+
+
 
 export default fetchBoundingBox = (uri) => {
   const data = new FormData();
@@ -8,7 +11,7 @@ export default fetchBoundingBox = (uri) => {
       type: "image/jpeg",
 
   });
-  return fetch("http://localhost:8000/test", {
+  return fetch("https://5db9e0a0.ngrok.io/test", {
     method: "POST",
     body: data,
   })
@@ -26,10 +29,10 @@ export const s3Upload = (uri, fileName, type, id) => {
       //Platform.OS === "android" ? this.state.photo.uri : this.state.photo.uri.replace("file://", ""),
       uri: `file://${uri}`,
       name: fileName,
-      type: type,
+      type: "image/jpeg",
 
   });
-  return fetch(`http://localhost:8000/upload/${id}`, {
+  return fetch(`https://5db9e0a0.ngrok.io/upload/${id}`, {
     method: "POST",
     body: data,
   })
@@ -40,32 +43,39 @@ export const s3Upload = (uri, fileName, type, id) => {
     });
 };
 
+//const { data } = await axios.post(`${this.path}/auth0`, args);
+
 export const getUserData = (token) => {
   console.log(token, 'token')
-  return fetch("http://localhost:8000/auth", {
-    method: "POST",
-    body: JSON.stringify({token: token}),
-    headers:{
-    'Content-Type': 'application/json'
-    }
-  })
+  return axios.post("https://5db9e0a0.ngrok.io/auth", { token })
     .then(response => {
-      return response.json()})
+      return response.data})
     .catch(error => {
-      throw Error("error")
+      throw Error(error)
     });
 }
 
+// export const getUserData = (token) => {
+//   console.log(token, 'token')
+//   return fetch("http://4d10a385.ngrok.io/auth", {
+//     method: "POST",
+//     body: JSON.stringify({token: token}),
+//     headers:{
+//     'Content-Type': 'application/json'
+//     }
+//   })
+//     .then(response => {
+//       return response.json()})
+//     .catch(error => {
+//       throw Error(error)
+//     });
+// }
+
 export const fetchFeed = (id) => {
   console.log("inside feeeeef", id)
-  return fetch(`http://localhost:8000/user/${id}`, {
-    method: "GET",
-    headers:{
-    'Content-Type': 'application/json'
-    }
-  })
+  return axios.get(`https://5db9e0a0.ngrok.io/user/${id}`)
     .then(response => {
-      return response.json()})
+      return response.data})
     .catch(error => {
       throw Error(error)
     });

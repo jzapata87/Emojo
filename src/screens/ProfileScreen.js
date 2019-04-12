@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Image, FlatList } from 'react-native';
 import { connect } from 'react-redux'
+import { Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 const ProfileScreen = ({avatar, name, list}) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
     <Text> {name} </Text>
     <Image
       source={{ uri: avatar}}
-      style={{ width: 75, height: 75, borderRadius: 25 }}
+      style={{ width: 75, height: 75, marginVertical: 5 }}
       resizeMode="contain"
     />
     <FlatList
       data={list}
       renderItem={({item}) => <Image
         source={{ uri: item.uri}}
-        style={{ width: 75, height: 75, borderRadius: 25 }}
+        style={{ width: width, height: width, marginBottom: 20 }}
       />}
       keyExtractor={(item, index) => item.uri}
     />
