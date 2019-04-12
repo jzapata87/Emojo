@@ -7,34 +7,23 @@ I use instagrams basic layout because I felt it best represented what I wanted t
 [![Build Status][travis-image]][travis-url]
 [![Downloads Stats][npm-downloads]][npm-url] -->
 
-Second attempt at Medium's CMS Editor.  After doing some research I found out about contentedible. This
-allowed me to build a WYSIWYG editor that Medium has.  So I looked up a simple app that was using a
-contentedible HTML element.  When I found one, I tweaked it and got to something pretty close to it.  Right now,
-the app isn't structured properly.  In the future, I do intend to refactor the code into a "standard" reactjs
-file structure.
-
-
+===
 ## Installation
-Download the zip, unzip, then on terminal cd into root directory and run the following commands to get it up and running. Nothing too complicated.
-OS X & Linux:
-
-```sh
-$ npm install
-# this will install the node modules
-$ npm start
-# this will start dev server at port 3000.
-```
+This is a react-native project, I will ask you to please refer those resources in order to get the project running on your machine.
+I did not use expo.  I used xcode and android studio to run the simulator/emulators.
 
 ## Usage example
+I will post a link to a video of me using the app or I will just use screenshots.
 
-I don't think screenshots will do justice to see how the app works.  So I recorded a [demo](https://youtu.be/FW214WbsseQ) of me interacting with the site.
+## Tech Used
 
-## Release History
-
-
-* 0.0.1
-    * [Here](https://github.com/jzapata87/CMSv1) is my first iteration of the editor.  It is quite different.
-
+| **Tech** | **Description** |
+| ---------|-----------------|
+| [React-Native](https://github.com/facebook/react-native) | React's UI framework for iOS and Android |
+| [React Navigation](https://reactnavigation.org/en/) | Routing and navigation for React Native apps |
+| [Redux](http://redux.js.org/) | State management |
+| [Redux-Saga](https://github.com/redux-saga/redux-saga) | Library used to make application side effects easier to manage|
+| [react-native-image-picker](https://github.com/react-native-community/react-native-image-picker) | React Native module that allows you to use native UI to select a photo/video from the device library or directly from the camera |
 
 
 ## Contact
