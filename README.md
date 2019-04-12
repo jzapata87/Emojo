@@ -25,6 +25,7 @@ I will post a link to a video of me using the app or I will just use screenshots
 | [Redux-Saga](https://github.com/redux-saga/redux-saga) | Library used to make application side effects easier to manage|
 | [react-native-image-picker](https://github.com/react-native-community/react-native-image-picker) | React Native module that allows you to use native UI to select a photo/video <br> from the device library or directly from the camera |
 | [react-native-view-shot](https://github.com/gre/react-native-view-shot) | Capture a React Native view to an image |
+| [react-native-fbsdk](https://github.com/facebook/react-native-fbsdk) | A React Native wrapper around the Facebook SDKs for Android and iOS. |
 
 
 
