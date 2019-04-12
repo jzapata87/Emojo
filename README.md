@@ -23,7 +23,10 @@ I will post a link to a video of me using the app or I will just use screenshots
 | [React Navigation](https://reactnavigation.org/en/) | Routing and navigation for React Native apps |
 | [Redux](http://redux.js.org/) | State management |
 | [Redux-Saga](https://github.com/redux-saga/redux-saga) | Library used to make application side effects easier to manage|
-| [react-native-image-picker](https://github.com/react-native-community/react-native-image-picker) | React Native module that allows you to use native UI to select a photo/video from the device library or directly from the camera |
+| [react-native-image-picker](https://github.com/react-native-community/react-native-image-picker) | React Native module that allows you to use native UI <br>to select a photo/video from the device library or directly from the camera |
+| [react-native-view-shot](https://github.com/gre/react-native-view-shot) | Capture a React Native view to an image |
+
+
 
 
 ## Contact
