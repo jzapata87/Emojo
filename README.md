@@ -1,7 +1,7 @@
 # Emojo App
 
-This is a project intended to be used as a learning tool.  Over time as new tech is release I plan on making new versions (by forking) to this with new tech.
-I use instagrams basic layout because I felt it best represented what I wanted to do.
+This is a project intended to be used as a learning tool.  Over time as new tech is released I plan on making new versions (by forking) to this with using said new tech.
+I used instagrams basic UI layout because I felt it best represented what I wanted to do.
 
 <!-- [![NPM Version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
