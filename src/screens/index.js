@@ -5,6 +5,7 @@ import SharePhotoScreen from './SharePhotoScreen';
 import PhotoCommentScreen from './PhotoCommentScreen';
 import CameraScreen from './CameraScreen';
 import LoginScreen from './LoginScreen';
+import TabBarComponent from './TabBarComponent';
 
 
 export {
@@ -14,7 +15,8 @@ export {
   SharePhotoScreen,
   PhotoCommentScreen,
   CameraScreen,
-  LoginScreen
+  LoginScreen,
+  TabBarComponent
 
 
 }

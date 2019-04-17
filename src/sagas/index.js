@@ -1,5 +1,5 @@
 import { put, takeEvery, call, select, fork } from 'redux-saga/effects'
-import fetchBoundingBox, { s3Upload, getUserData, fetchFeed } from '../api/index'
+import fetchBoundingBox, { s3Upload, getUserData, fetchFeed, fetchProfileFeed } from '../api/index'
 
 
 function* fetchData(action) {
@@ -33,6 +33,7 @@ function* getUserInfo(action) {
       const data = yield getUserData(action.token)
       yield put({type: "GET_USER_INFO_SUCCEEDED", data: data})
       yield put({type: "GET_USER_FEED", id: data.user.id})
+      yield put({type: "GET_FEED", id: data.user.id})
 
    } catch (error) {
       yield put({type: "GET_USER_INFO_FAILED", error})
@@ -52,11 +53,24 @@ function* fetchUserFeed(action) {
    }
 }
 
+function* fetchFollowersFeed(action) {
+
+   try {
+      const data = yield fetchProfileFeed(action.id)
+      yield put({type: "GET_FEED_SUCCEEDED", data: data})
+
+   } catch (error) {
+      yield put({type: "GET_FEED_FAILED", error})
+
+   }
+}
+
 
 export default function* watchFetchData() {
   yield takeEvery('FETCH_REQUESTED', fetchData)
   yield takeEvery('SHARE_STARTED', uploadToS3)
   yield takeEvery('GET_USER_INFO', getUserInfo)
   yield takeEvery('GET_USER_FEED', fetchUserFeed)
+  yield takeEvery('GET_FEED', fetchFollowersFeed)
 
 }

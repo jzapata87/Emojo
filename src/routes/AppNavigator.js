@@ -4,11 +4,12 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import PhotoCommentNavigator from './PhotoCommentNavigator';
 import PhotoFeedNavigator from './PhotoFeedNavigator';
 import ProfileScreenNavigator from './ProfileScreenNavigator';
-import {LoginScreen} from '../screens';
+import {LoginScreen, TabBarComponent} from '../screens';
 
 
 
-export default createBottomTabNavigator({
+export default createBottomTabNavigator(
+  {
   Feed: PhotoFeedNavigator,
   Upload: {
     screen: PhotoCommentNavigator,
@@ -19,6 +20,11 @@ export default createBottomTabNavigator({
   },
   Profile: ProfileScreenNavigator,
 
-});
+},
+{
+    tabBarComponent: TabBarComponent,
+}
+
+);
 
 export const AuthStack = createStackNavigator({SignIn: LoginScreen})

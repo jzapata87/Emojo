@@ -10,6 +10,18 @@ const user = (state = {}, action) => {
         ...state,
           data: action.data
       }
+    case "GET_FEED":
+      return {
+        ...state,
+          feed: action.data,
+          isFetched: false
+      }
+    case "GET_FEED_SUCCEEDED":
+      return {
+        ...state,
+          feed: action.data,
+          isFetched: true
+      }
     default:
       return state
   }
